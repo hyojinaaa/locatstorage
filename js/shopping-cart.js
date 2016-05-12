@@ -1,4 +1,3 @@
-localStorage.setItem('cart', JSON.stringify( [] ) );
 
 // If a shopping cart does not exist in localstorage
 if( localStorage.getItem('cart')  == null ) {
@@ -13,16 +12,9 @@ var cart = JSON.parse( localStorage.getItem('cart') );
 // Show the contents of the cart
 console.log( cart );
 
-var product = {
-	id: 1234,
-	price: 12.99
-}
+// Show the user how many items they have in the cart
+updateCartDisplay();
 
-// Add this product to the cart array
-cart.push(product);
-
-// Show the contents of the cart
-console.log(cart);
 
 // Find all the add to cart buttons
 var addToCartButtons = document.querySelectorAll('.add-to-cart');
@@ -48,9 +40,34 @@ function addToCart() {
 
 	localStorage.setItem('cart', JSON.stringify(cart) );
 
+	console.log(cart);
+
+	updateCartDisplay();
+
 }
 
+// Listen for the clicks on the clear cart button
+document.querySelector('#clear-cart').onclick = function() {
 
+	// Reset localstorage
+	localStorage.setItem('cart', JSON.stringify( [] ) );
+
+	// Reset the cart variable
+	cart = [];
+
+	updateCartDisplay();
+
+};
+
+function updateCartDisplay() {
+
+	// Cet the cart contents
+	var cart = JSON.parse( localStorage.getItem('cart') );
+
+	// Count the cart contents and display number on screen
+	document.querySelector('#total-cart').innerHTML = cart.length;
+
+}
 
 
 
