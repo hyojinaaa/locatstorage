@@ -29,7 +29,7 @@ for(var i=0; i<addToCartButtons.length; i++) {
 function addToCart() {
 
 	var productName = this.dataset.name;
-	var productPrice = this.dataset.price;
+	var productPrice = parseFloat(this.dataset.price);
 
 	var product = {
 		name: productName,
@@ -101,8 +101,15 @@ function showCartTable() {
 	// Add the headings row to the table
 	table.appendChild(headingsRow);
 
+	// Grand total
+	var grandTotal = 0;
+
+
 	// Loop over all the cart items
 	for(var i=0; i<cart.length; i++) {
+
+		// Get the price of the product and add to grand total
+		grandTotal += cart[i].price;
 
 		// Create a row for this product
 		var row = document.createElement('tr');
@@ -125,6 +132,19 @@ function showCartTable() {
 		table.appendChild(row);
 
 	}
+
+	console.log(grandTotal);
+
+	var grandTotalRow = document.createElement('tr');
+	var grandTotalTD = document.createElement('td');
+	var fillerTD = document.createElement('td');
+
+	grandTotalTD.innerHTML = 'grandTotal: $' +grandTotal;
+
+	grandTotalRow.appendChild(fillerTD);
+	grandTotalRow.appendChild(grandTotalTD);
+
+	table.appendChild(grandTotalRow);
 
 	// Clear whatever is inside the div
 	container.innerHTML = '';
