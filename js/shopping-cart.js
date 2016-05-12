@@ -67,6 +67,70 @@ function updateCartDisplay() {
 	// Count the cart contents and display number on screen
 	document.querySelector('#total-cart').innerHTML = cart.length;
 
+	showCartTable();
+
+}
+
+function showCartTable() {
+
+	// Find the container that will hold the table
+	var container = document.querySelector('#cart-table');
+
+	// Create the HTML table
+	var table = document.createElement('table');
+
+	table.setAttribute('border', '1');
+
+	// Create a row to hold the headings
+	var headingsRow = document.createElement('tr');
+
+	// Create the name heading
+	var nameHeading = document.createElement('th');
+
+	nameHeading.innerHTML = 'Product Name';
+
+	// Create the price heading
+	var priceHeading = document.createElement('th');
+
+	priceHeading.innerHTML = 'Price';
+
+	// Add the headings to the headings row
+	headingsRow.appendChild(nameHeading);
+	headingsRow.appendChild(priceHeading);
+
+	// Add the headings row to the table
+	table.appendChild(headingsRow);
+
+	// Loop over all the cart items
+	for(var i=0; i<cart.length; i++) {
+
+		// Create a row for this product
+		var row = document.createElement('tr');
+
+		// Create the product name data element
+		var nameTD = document.createElement('td');
+
+		// Create the product price data element
+		var priceTD = document.createElement('td');
+
+		// Add data to the TD elements
+		nameTD.innerHTML = cart[i].name;
+		priceTD.innerHTML = cart[i].price;
+
+		// Add the TD elements to the row
+		row.appendChild(nameTD);
+		row.appendChild(priceTD);
+
+		// Add this row to the table
+		table.appendChild(row);
+
+	}
+
+	// Clear whatever is inside the div
+	container.innerHTML = '';
+
+	// Add the table to the screen
+	container.appendChild(table);
 }
 
 
